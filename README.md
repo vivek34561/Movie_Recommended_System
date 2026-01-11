@@ -1,132 +1,256 @@
 # 🎬 Movie Recommender System
 
-A modern movie recommendation system built with FastAPI backend and Streamlit frontend. The system uses TF-IDF vectorization and genre-based filtering to provide personalized movie recommendations.
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="Python"/>
+  <img src="https://img.shields.io/badge/FastAPI-backend-green.svg" alt="FastAPI"/>
+  <img src="https://img.shields.io/badge/Streamlit-frontend-red.svg" alt="Streamlit"/>
+  <img src="https://img.shields.io/badge/Machine%20Learning-TF--IDF-orange.svg" alt="TF-IDF"/>
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"/>
+</p>
 
-## ✨ Features
+<p align="center">
+  <strong>A modern full-stack movie recommendation system using content-based filtering and live movie data.</strong>
+</p>
 
-- **Smart Search**: Autocomplete search with real-time movie suggestions
-- **Hybrid Recommendations**: Combines TF-IDF content-based filtering with genre matching
-- **Rich Movie Details**: Displays posters, backdrops, release dates, genres, and overviews
-- **Modern UI**: Clean, responsive interface with grid-based movie displays
-- **TMDB Integration**: Fetches live movie data and images from The Movie Database API
+<p align="center">
+  <a href="#-features">✨ Features</a> •
+  <a href="#-architecture">🏗️ Architecture</a> •
+  <a href="#-tech-stack">🛠️ Tech Stack</a> •
+  <a href="#-quick-start">🚀 Quick Start</a> •
+  <a href="#-deployment">🌐 Deployment</a>
+</p>
+
+---
+
+## 🎯 Overview
+
+This project is a **content-based movie recommender system** built with a **FastAPI backend** and **Streamlit frontend**.
+It recommends movies based on semantic similarity using **TF-IDF vectorization**, combined with **genre-based filtering** for better relevance.
+
+The application fetches **real-time movie posters, metadata, and descriptions** using the TMDB API and presents recommendations in a clean, modern UI.
+
+---
+
+## ✨ Key Features
+
+### 🔍 Smart Search & Autocomplete
+
+* Real-time movie name suggestions
+* Helps users quickly find relevant titles
+* Reduces spelling and discovery friction
+
+### 🎯 Hybrid Recommendation Engine
+
+* TF-IDF cosine similarity for content-based filtering
+* Genre-based constraints to improve relevance
+* Fast inference using precomputed vectors
+
+### 🎥 Rich Movie Details
+
+* Movie posters and backdrops
+* Release date, genres, and overview
+* Clean grid-based movie layout
+
+### 🖥️ Modern Frontend
+
+* Built with Streamlit
+* Responsive layout and smooth user experience
+* Designed for simplicity and speed
+
+### 🌐 Live Movie Data
+
+* Real-time movie metadata and images
+* Powered by The Movie Database (TMDB) API
+
+---
+
+## 🏗️ Architecture
+
+```
+User (Streamlit UI)
+        ↓
+Search / Movie Selection
+        ↓
+FastAPI Backend
+        ↓
+TF-IDF Vector Similarity
+        ↓
+Genre-Based Filtering
+        ↓
+Top-N Recommendations
+        ↓
+TMDB API (Posters & Metadata)
+        ↓
+Rendered Results (Streamlit)
+```
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Backend**: FastAPI, Python
-- **Frontend**: Streamlit
-- **ML**: TF-IDF Vectorization, Scikit-learn
-- **Data**: TMDB API, Pandas, NumPy
-- **Deployment**: Heroku-ready with Procfile
+| Layer            | Technology           |
+| ---------------- | -------------------- |
+| Language         | Python 3.9+          |
+| Backend          | FastAPI              |
+| Frontend         | Streamlit            |
+| Machine Learning | TF-IDF, Scikit-learn |
+| Data Processing  | Pandas, NumPy        |
+| External API     | TMDB API             |
+| Deployment       | Heroku               |
+| Model Storage    | Pickle               |
 
-## 📦 Installation
+---
 
-1. Clone the repository:
+## 🚀 Quick Start
+
+### Prerequisites
+
+* Python 3.9+
+* TMDB API key (free)
+
+Get your API key from:
+[https://www.themoviedb.org/settings/api](https://www.themoviedb.org/settings/api)
+
+---
+
+### Installation
+
 ```bash
+# Clone the repository
 git clone <your-repo-url>
 cd Movie_Recommended_System
-```
 
-2. Create a virtual environment:
-```bash
+# Create virtual environment
 python -m venv .venv
-.venv\Scripts\activate  # Windows
-# or
-source .venv/bin/activate  # Linux/Mac
-```
+source .venv/bin/activate      # Linux/Mac
+.venv\Scripts\activate         # Windows
 
-3. Install dependencies:
-```bash
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-4. Create a `.env` file with your TMDB API key:
+### Environment Variables
+
+Create a `.env` file:
+
 ```
 TMDB_API_KEY=your_api_key_here
 ```
 
-Get your free API key from [The Movie Database](https://www.themoviedb.org/settings/api)
+---
 
-## 🚀 Usage
+## ▶️ Running the Application
 
-### Run Backend (FastAPI)
+### Start Backend (FastAPI)
+
 ```bash
 uvicorn main:app --reload
 ```
-API will be available at `http://127.0.0.1:8000`
 
-### Run Frontend (Streamlit)
+Backend runs at:
+[http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+---
+
+### Start Frontend (Streamlit)
+
 ```bash
 streamlit run app.py
 ```
-App will open at `http://localhost:8501`
+
+Frontend runs at:
+[http://localhost:8501](http://localhost:8501)
+
+---
 
 ## 📁 Project Structure
 
 ```
 Movie_Recommended_System/
-├── app.py                 # Streamlit frontend
-├── main.py               # FastAPI backend
-├── movies.ipynb          # Data preprocessing notebook
-├── requirements.txt      # Python dependencies
-├── Procfile             # Heroku deployment configuration
+├── app.py                  # Streamlit frontend
+├── main.py                 # FastAPI backend
+├── movies.ipynb            # Data preprocessing & model building
+├── requirements.txt        # Dependencies
+├── Procfile                # Deployment config
 ├── data/
 │   └── movies_metadata.csv
-└── pickled models (generated):
+└── models/
     ├── df.pkl
     ├── indices.pkl
     ├── tfidf_matrix.pkl
     └── tfidf.pkl
 ```
 
+---
+
 ## 🔧 API Endpoints
 
-- `GET /` - Health check
-- `GET /movie/autocomplete?query={query}` - Search autocomplete
-- `GET /movie/search?query={query}&tfidf_top_n={n}&genre_limit={n}` - Get recommendations
-- `GET /movie/{tmdb_id}` - Get movie details
+| Method | Endpoint                     | Description               |
+| ------ | ---------------------------- | ------------------------- |
+| GET    | `/`                          | Health check              |
+| GET    | `/movie/autocomplete?query=` | Autocomplete movie search |
+| GET    | `/movie/search`              | Get movie recommendations |
+| GET    | `/movie/{tmdb_id}`           | Fetch movie details       |
+
+---
+
+## 📊 How It Works
+
+1. Movie metadata is cleaned and vectorized using TF-IDF
+2. User selects or searches for a movie
+3. Cosine similarity finds semantically similar movies
+4. Genre filtering refines the recommendations
+5. TMDB API enriches results with posters and metadata
+6. Results are displayed in the Streamlit UI
+
+---
 
 ## 🌐 Deployment
 
 ### Heroku Deployment
 
-1. Create a Heroku app:
 ```bash
+# Create app
 heroku create your-app-name
-```
 
-2. Set environment variables:
-```bash
+# Set environment variable
 heroku config:set TMDB_API_KEY=your_api_key_here
-```
 
-3. Deploy:
-```bash
+# Deploy
 git push heroku main
-```
 
-4. Scale the web dyno:
-```bash
+# Scale dyno
 heroku ps:scale web=1
 ```
 
-## 📊 How It Works
+---
 
-1. **Data Processing**: Movie metadata is processed and vectorized using TF-IDF
-2. **Search**: User searches for a movie via autocomplete
-3. **Recommendations**: System finds similar movies using:
-   - Content-based filtering (TF-IDF cosine similarity)
-   - Genre-based matching
-4. **Display**: Results are fetched from TMDB API with posters and details
+## 🔮 Future Improvements
+
+* Collaborative filtering integration
+* User profiles and watch history
+* Hybrid ML + deep learning recommendations
+* Caching layer for faster API responses
+* Improved ranking with popularity signals
+
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome.
+Feel free to open issues, suggest enhancements, or submit pull requests.
+
+---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License © 2025 Vivek Kumar Gupta
+
+---
 
 ## 🙏 Acknowledgments
 
-- [The Movie Database (TMDB)](https://www.themoviedb.org/) for the API and data
-- Dataset from Kaggle/TMDB movies metadata
+* The Movie Database (TMDB) for movie data and images
+* Kaggle TMDB movie metadata dataset
+
+ Align it tightly with ML Engineer / Backend Engineer roles
